@@ -1,20 +1,31 @@
 <?php
 require_once('class/dbcon.php');
+session_start();
 class User{
     public$name,$phone,$ques,$ans,$userpassword,$email, $userpassword2,$conn;
     
     function entry($name,$phone,$ques,$ans,$userpassword,$email,$userpassword2,$conn){
-           
-    //    if($name==''||$phone==''||$ques='Select a security question'||$ans=''||$userpassword=''||$email==''||$userpassword2==''){
-    //     echo "<script>alert('All Entry Must Be Required ');
-    //     </script>";
-    //    }
+
         $count=0;
         if ($userpassword != $userpassword2) {
             echo "<script>alert('Your Password and Repassword should be same');
             </script>";
         $count++;
                }
+               if($name=='admin'){
+                echo "<script>alert('this Name is reserve please go for another one');
+                </script>";
+                $count++;
+                     }
+            if($name!='admin'){
+                $sql="SELECT * FROM `tbl_user` WHERE `email`='".$email."'";
+                $result=$conn->query($sql);
+                if ($result->num_rows > 0) {
+                    echo "<script>alert('Email already exists');
+                </script>";
+                $count++;
+                }
+            }  
                  
         if ($count==0) {
 
@@ -36,50 +47,62 @@ class User{
                     }
             
                 }
-            }  
-            function admit($email,$password,$conn){
+            } 
+        
+   function admit($email,$password,$conn){
                 $count=0;
                 
                 if ($count==0) {
                     
                      $sql1="SELECT * from tbl_user WHERE `email`='".$email."'
                      AND password='".md5($password)."'";
-             
+                    echo $sql1;
                      $result=$conn->query($sql1);
-               
+               print_r($result);
                     if ($result->num_rows > 0) {
                         while ($row= $result->fetch_assoc()) {
                             $_SESSION['userdata']=array("name"=>$row['name'],
                             "user_id"=>$row['id']);
                           
-                            // print_r($_SESSION);
-                            // if ($row['is_admin']==1 && $_SESSION['userdata']['name']=='admin') {
-                            //     // header("Location: admin.php");
-                            //     echo "<script>alert('uderrr');<script>";
-                            // }
-                           
-                            if ($row['is_admin']==0) {
-                                 if($row['active']==0){
-                                    echo "<script>alert('huedu');<script>";
-                                  echo "<center><h3 style='color:white; font-size:1.2em;'><b>plzz wait for admin approval your account is not verified yet</b></h3></center>";
+                            if ($row['is_admin']==0) 
+                            {
+                                 if($row['active']==0)
+                                 {
+                                 
+                                    echo "<script>alert('Account not approve yet please wait for  admin approval');<script>";
+                                } 
+                                else{
+                                    echo "<script>alert('logged in successfully');
+                                     window.location.href='index.php';</script>";
                                 }
-                                else {
-                                   
-                                    // echo "enter";
-                                    // header("Location:cab\index2.php");
-                                    header("Location:index.php");
-                                }
+                            }
+                              
+                            else if($row['is_admin']==1)
+                               {
+                                echo "<script>alert('logged in successfully');
+                                window.location.href='admin/admin.php';</script>";
+                                } 
+                             
                                
-                            }     
-                        }
-            
-                    }
-                    else {
-                      $count++;
-                      echo "<center><h3 style='color:white; font-size:1.2em;'>Invalid Login credentials</h3></center>";
-                    }
+                          }    
+     }
+              
+                    // else {
+                    //   $count++;
+                    //   echo "<center><h3 style='color:white; font-size:1.2em;'>Invalid Login credentials</h3></center>";
+                    // }
                     
             }
-            $conn->close();
+           
+        }
+        function verify($name,$m,$conn){
+            if($name=$_SESSION['otp']){
+                $sql="UPDATE tbl_user SET `email_approved`='1' , `active`='1' 
+                WHERE `email`='".$m."'";
+                
+                $result=$conn->query($sql);
+                echo "<script>alert('verify successfully please login');
+                window.location.href='login.php';</script>";
+               }
         }
  }

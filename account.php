@@ -1,4 +1,9 @@
-<?php require "header.php" ?>
+<?php require "header.php" ;
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+	require '/home/cedcoss/vendor/autoload.php';
+
+?>
 
 <?php 
 require_once('class/user.php');
@@ -19,10 +24,43 @@ if (isset($_POST['submit'])) {
 	
 	
 	$obj2->entry($name,$phone,$ques,$ans,$userpassword,$email, $userpassword2,$obj->conn);
-	
 
-}
+            	$otp = rand(1000,9999);
+				$_SESSION['otp']=$otp;
+				$mail = new PHPMailer();
+				try {                                       
+					     $mail->isSMTP(true);                                             
+					    $mail->Host       = 'smtp.gmail.com';                     
+					    $mail->SMTPAuth   = true;                              
+					    $mail->Username   = 'nikhilsyal7@gmail.com';                  
+					    $mail->Password   = 'nikhil_0987';                         
+					    $mail->SMTPSecure = 'tls';                               
+					    $mail->Port       = 587;   
+					  
+					    $mail->setfrom('nikhilsyal7@gmail.com', 'CedHosting');            
+					    $mail->addAddress($email); 
+					    $mail->addAddress($email, $name); 
+					       
+					    $mail->isHTML(true);                                   
+					    $mail->Subject = 'Account Verification'; 
+					    $mail->Body    = 'Hi User,Here is your otp for account verification-'.$otp; 
+					    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+					    $mail->send();
+					    header('location: verification.php?email=' . $email);
+					} 
+					catch (Exception $e)
+					 {
+					    echo "Mailer Error: " . $mail->ErrorInfo;
+					}
+									
+									
+								}
+		
+			
+			
+			
 ?>
+	
 
 
 			<div class="content">
@@ -30,20 +68,20 @@ if (isset($_POST['submit'])) {
 	<div class="main-1">
 		<div class="container">
 			<div class="register">
-		  	  <form action="" method="POST"> 
+		  	  <form onsubmit=" return validate()" method="POST"> 
 				 <div class="register-top-grid">
 					<h3>personal information</h3>
 					 <div>
 						<span> Name<label>*</label></span>
-						<input type="text" name="name" required onkeydown="return alphaonly(event);"> 
+						<input type="text" name="name" class="lugwt" required pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" > 
 					 </div>
 					 <div>
 						<span>Phone No.<label>*</label></span>
-						<input type="text" name="phone" id="mobile" required> 
+						<input type="text" name="phone" id="mobile" maxlength="10" class="lugwt" onkeydown="return onlynumber(event);" required> 
 					 </div>
 					 <div>
 						 <span>Email Address<label>*</label></span>
-						 <input type="email" name="email" id="email" onkeydown="return alphaonly3(event);" required >  
+						 <input type="email" name="email" id="email" class="lugwt" onkeydown="return alphaonly3(event);" required >  
 					 </div>
 					 <!-- <div>
 						 <span>Security Question<label>*</label></span>
@@ -51,8 +89,10 @@ if (isset($_POST['submit'])) {
 					 </div> -->
 					 <div>
 					 	 <span>Security Question<label>*</label></span>
-						<select style="width:524px;height:37px; " name="ques" required>
-						    <option>Select a security question</option>
+					<select name="ques" id="squestion" style="width:524px;height:37px" required>
+
+                       <option value="" selected disabled hidden>--Select Security Question--</option>
+						   
 							<option value="What was your childhood nickname?">What was your childhood nickname?</option>
 							<option value="What is the name of your favourite childhood friend?">What is the name of your favourite childhood friend?</option>
 							<option value="What was your favourite place to visit as a child?">What was your favourite place to visit as a child?</option>
@@ -62,7 +102,8 @@ if (isset($_POST['submit'])) {
 					 </div>
 					 <div>
 						 <span>Answer<label>*</label></span>
-						 <input type="text" name="ans" required onkeydown="return alphaonly2(event);"> 
+						 <input type="text"  class="lugwt" name="ans" id="sans" required pattern="^[a-zA-Z0-9]+$"
+                          onkeydown="return alphaonly2(event);"> 
 					 </div>
 					 <div class="clearfix"> </div>
 					   <a class="news-letter" href="#">
@@ -73,18 +114,18 @@ if (isset($_POST['submit'])) {
 						    <h3>login information</h3>
 							 <div>
 								<span>Password<label>*</label></span>
-								<input type="password" name="pass" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" minlength="8" maxlength="16" required>
+								<input type="password" name="pass" class="lugwt" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" minlength="8" maxlength="16" required>
 							 </div>
 							 <div>
 								<span>Confirm Password<label>*</label></span>
-								<input type="password" name="repass" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required minlength="8" maxlength="16" >
+								<input type="password" name="repass" class="lugwt" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required minlength="8" maxlength="16" >
 							 </div>
 					 </div>
 				
 				<div class="clearfix"> </div>
 				<div class="register-but">
 				   
-					   <input type="submit" value="submit" name="submit" class="a">
+					   <input type="submit" value="submit" name="submit" class="a" >
 					   <div class="clearfix"> </div>
 				   </form>
 				</div>
@@ -95,12 +136,28 @@ if (isset($_POST['submit'])) {
 
 			</div>
 			<script>
+				var count_mob=0;
 				var count=0;
 				var temp=0;
+				var i=0;
+				var i2=0;
+				var count2=0;
+				function validate() {
+                  if (Number.isInteger(parseInt($('#sans').val()))) {
+                  alert('Enter Answer in Correct Fornat');
+                  $('#sans').val(""); 
+                 return false;
+                    }
+                 else {
+                   return true;
+                      }
+
+}
 				function alphaonly(button) { 
 					var code = button.which;
-					if(count>0 && code==32){
+					if(count>0 && code==32 && (i2==0 || i2==1)){
 		         	count=0;
+					 i2++;
 			       return true; 
 			       
 		} 
@@ -120,36 +177,63 @@ if (isset($_POST['submit'])) {
 
         var code = button.which;
 		
-        if (code > 31 && (code < 48 || code > 57)) 
+        if (code > 31 && (code < 48 || code > 57)&& (code < 96 || code > 105)) 
             return false; 
         return true; 
         var myval = $(this).val();
     
     } 
 	function alphaonly3(button) { 
-		if(temp=0 && code==46){
-		         	temp=1;
-			       return true;
-	}  
+		var code = button.which;
+		
+		if(count>0 && code==190){
+			console.log(count);
+		         	count=0;
+				 return true; 
+			       
+		} 
+	            console.log(button.which);
+                
+                if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code==09)||(code > 47 && code < 58)||code==37||code==39) {
+					count++;
+					console.log(count);
+			       return true; 
+		     	
+				 }
+				//  else if(code > 47 || code < 58){
+				// 	count++;
+				// 	return true; 
+				//  }
+			
+				 else{
+					return false;  
+				 }
 	}
 
     function alphaonly2(button) { 
 	console.log(button.which);
+
         var code = button.which;
-	     if (code==32)
-		return false; 
-            return true; 
-        
-    } 
-
-
+		if(count>0 && code==32){
+		
+			count=0;
+			return true; 
+		}
+		else if(code==32){
+			return false;
+		}
+		else{
+			count++;
+			return true; 
+		}
+		} 
 $("#mobile").bind("keyup", function (e) {
 
-mobile_no=$("#mobile").val();
+mobile=$("#mobile").val();
 
 var fchar=$("#mobile").val().substr(0, 1);
 var schar=$("#mobile").val().substr(1,1);
-console.log(schar);
+
 
 if(fchar==0) {
 $('#mobile').attr('maxlength','11');
@@ -165,18 +249,45 @@ $("#mobile").val("");
 } else {
 $('#mobile').attr('maxlength','10');
 }
+if(mobile.length>9){
+for(i=0;i<=mobile.length;i++){
+	
+if(mobile.substr(i,1)==mobile.substr(i+1,1)){
+	    count2++;
+		console.log(count2);
+		if(count2==9){
+			count2=0;
+			alert('Invalid Phone no.');
+			$("#mobile").val("");
+		     mobile='';
+			console.log(mobile.length);
+		}
+		
+	}
+	else if(mobile.substr(i,1)!=mobile.substr(i+1,1)){
+		count2=0;
+	}
+}
+}
 });
-$("#email").bind("keypress", function (e) {
 
 
-var keyCode = e.which ? e.which : e.keyCode
-if (!(keyCode==46) && !(keyCode >= 48 && keyCode <= 57) && !(keyCode >= 64 && keyCode <= 90) && !(keyCode >= 97 && keyCode <= 122)) {
-//console.log(keycode);
-return false;
+$("#email").bind("keypress keyup keydown", function (e) {
+
+
+var email = $('#email').val();
+var regtwodots = /^(?!.*?\.\.).*?$/;
+var lemail = email.length;
+if ((email.charAt(0) == ".") || !(regtwodots.test(email))) {
+alert("invalid email");
+$('#email').val("");
+return;
 }
 
+});
 
-
+$('.lugwt').on("cut copy paste drag drop",function(e) {
+e.preventDefault();
 });
 			</script>
 <!-- login -->
