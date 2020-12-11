@@ -1,6 +1,11 @@
 <?php
-require_once('class/dbcon.php');
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
+
+
+require_once('dbcon.php');
+
 class User{
     public$name,$phone,$ques,$ans,$userpassword,$email, $userpassword2,$conn;
     
@@ -35,7 +40,7 @@ class User{
 
         if ($conn->query($sql)===true) {
             echo "<script>alert('signed in successfully');
-            window.location.href='login.php';</script>";
+            window.location.href='account2.php';</script>";
                         
                         // header("Location: login.php");
                     } 
@@ -56,9 +61,9 @@ class User{
                     
                      $sql1="SELECT * from tbl_user WHERE `email`='".$email."'
                      AND password='".md5($password)."'";
-                    echo $sql1;
+                    
                      $result=$conn->query($sql1);
-               print_r($result);
+               
                     if ($result->num_rows > 0) {
                         while ($row= $result->fetch_assoc()) {
                             $_SESSION['userdata']=array("name"=>$row['name'],
@@ -96,13 +101,24 @@ class User{
            
         }
         function verify($name,$m,$conn){
-            if($name=$_SESSION['otp']){
+           
+           
                 $sql="UPDATE tbl_user SET `email_approved`='1' , `active`='1' 
                 WHERE `email`='".$m."'";
-                
+                echo $sql;
                 $result=$conn->query($sql);
-                echo "<script>alert('verify successfully please login');
+                echo "<script>alert('Email-verify successfully please login');
                 window.location.href='login.php';</script>";
-               }
+               
         }
- }
+        function verify2($name,$m,$conn){
+            $sql="UPDATE tbl_user SET `phone_approved`='1' , `active`='1' 
+            WHERE `email`='".$m."'";
+            echo $sql;
+            $result=$conn->query($sql);
+            echo "<script>alert('phone-verify successfully please login');
+            window.location.href='login.php';</script>";
+           
+    }
+ 
+    }

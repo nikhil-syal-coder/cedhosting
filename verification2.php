@@ -1,60 +1,70 @@
-
 <?php 
-
-
 require_once('header.php');
 require_once('class/user.php');
 require_once('class/dbcon.php');
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require '/home/cedcoss/vendor/autoload.php';
 $obj= new DB();
 $obj2=new User();
-if (isset($_POST['submitt'])){
-$otp = rand(1000,9999);
-$_SESSION['otp']=$otp;
-$mail = new PHPMailer();
+ $m=$_SESSION['email'];
 
-try {                                       
-         $mail->isSMTP(true);                                             
-        $mail->Host       = 'smtp.gmail.com';                     
-        $mail->SMTPAuth   = true;                              
-        $mail->Username   = 'nikhilsyal7@gmail.com';                  
-        $mail->Password   = 'nikhil_0987';                         
-        $mail->SMTPSecure = 'tls';                               
-        $mail->Port       = 587;   
-      
-        $mail->setfrom('nikhilsyal7@gmail.com', 'CedHosting');            
-        $mail->addAddress($_SESSION['email']); 
-        $mail->addAddress($_SESSION['email'], $_SESSION['name']); 
-           
-        $mail->isHTML(true);                                   
-        $mail->Subject = 'Account Verification'; 
-        $mail->Body    = 'Hi User,Here is your otp for account verification-'.$otp; 
-        $mail->AltBody = 'Body in plain text for non-HTML mail clients';
-        $mail->send();
-        // header('location: verification.php?email=' . $email);
-    } 
-    catch (Exception $e)
-     {
-        echo "Mailer Error: " . $mail->ErrorInfo;
-    }
-
-}
 if (isset($_POST['submit'])){
-  
-    $m=$_SESSION['email'];
+
 
     $name=isset($_POST['otp'])?$_POST['otp']:'';
     if($name!=$_SESSION['otp']){
         echo "<script>alert('Email-verify unsuccessfull please do again');
-        window.location.href='verification.php';</script>";
+        window.location.href='verification2.php';</script>";
     }
-    $obj2->verify($name,$m,$obj->conn);
-  
+    else{
+      $obj2->verify2($name,$m,$obj->conn);
+    }
+   
 }
 
+if (isset($_POST['submitt'])){
+$otp = rand(1000,9999);
+$_SESSION['otp']=$otp;
+$fields = array(
+    "sender_id" => "FSTSMS",
+    "message" => 'Your Otp is'.$otp,
+    "language" => "english",
+    "route" => "p",
+    "numbers" => $_SESSION['phone'],
+);
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://www.fast2sms.com/dev/bulk",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_SSL_VERIFYHOST => 0,
+  CURLOPT_SSL_VERIFYPEER => 0,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => json_encode($fields),
+  CURLOPT_HTTPHEADER => array(
+    "authorization:12ipLshQWJV8gIqzklHye65jSODYbZwEafnxXNGvUKFC93MAcu81sAxhFSHk3pmZrbTeJn2Y6aMRcK0X",
+    "accept: */*",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+}
 ?>
+
 <div class="content">
 				<!-- registration -->
 	<div class="main-1">
@@ -95,9 +105,8 @@ if (isset($_POST['submit'])){
                         <input type="text" name="otp" >
                         <div class="register-but">
                        <input type="submit" value="submit" name="submit" class="a" >
-                       <input type="submit" value="Send OTP" name="submitt" class="a a1" >
-                       <input type="submit" value="Re-Send OTP" name="submitt" class="a a1" >
-                     
+                      <input type="submit" value="Send OTP" name="submitt" class="a a1" >
+                      <input type="submit" value="Re-Send OTP" name="submitt" class="a a1" >
 </div>
 </div>
 </form>
@@ -106,8 +115,7 @@ if (isset($_POST['submit'])){
 		   </div>
 		 </div>
 	</div>
-
-		<style>
+  <style>
         .a1{
             border:1px solid black;
             margin-top:10px;
@@ -115,7 +123,9 @@ if (isset($_POST['submit'])){
         .a{
           border:1px solid black; 
         }
-        </style>	
+       
+        </style>
+				
 <?php 
 require_once 'footer.php';
 ?>

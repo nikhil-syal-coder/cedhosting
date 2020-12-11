@@ -1,7 +1,8 @@
-<?php require "header.php" ;
-	use PHPMailer\PHPMailer\PHPMailer;
-	use PHPMailer\PHPMailer\Exception;
-	require '/home/cedcoss/vendor/autoload.php';
+<?php 
+    require "header.php" ;
+	// use PHPMailer\PHPMailer\PHPMailer;
+	// use PHPMailer\PHPMailer\Exception;
+	// require '/home/cedcoss/vendor/autoload.php';
 
 ?>
 
@@ -21,37 +22,43 @@ if (isset($_POST['submit'])) {
 	$email=isset($_POST['email'])?$_POST['email']:'';
 	$ques=isset($_POST['ques'])?$_POST['ques']:'';
 	$ans=isset($_POST['ans'])?$_POST['ans']:'';
-	
+	$_SESSION['name']=$name;
+	$_SESSION['phone']=$phone;
+	$_SESSION['email']=$email;
+	$_SESSION['ques']=$ques;
+	$_SESSION['ans']=$ans;
+
+
 	
 	$obj2->entry($name,$phone,$ques,$ans,$userpassword,$email, $userpassword2,$obj->conn);
 
-            	$otp = rand(1000,9999);
-				$_SESSION['otp']=$otp;
-				$mail = new PHPMailer();
-				try {                                       
-					     $mail->isSMTP(true);                                             
-					    $mail->Host       = 'smtp.gmail.com';                     
-					    $mail->SMTPAuth   = true;                              
-					    $mail->Username   = 'nikhilsyal7@gmail.com';                  
-					    $mail->Password   = 'nikhil_0987';                         
-					    $mail->SMTPSecure = 'tls';                               
-					    $mail->Port       = 587;   
+            	// $otp = rand(1000,9999);
+				// $_SESSION['otp']=$otp;
+				// $mail = new PHPMailer();
+				// try {                                       
+				// 	     $mail->isSMTP(true);                                             
+				// 	    $mail->Host       = 'smtp.gmail.com';                     
+				// 	    $mail->SMTPAuth   = true;                              
+				// 	    $mail->Username   = 'nikhilsyal7@gmail.com';                  
+				// 	    $mail->Password   = 'nikhil_0987';                         
+				// 	    $mail->SMTPSecure = 'tls';                               
+				// 	    $mail->Port       = 587;   
 					  
-					    $mail->setfrom('nikhilsyal7@gmail.com', 'CedHosting');            
-					    $mail->addAddress($email); 
-					    $mail->addAddress($email, $name); 
+				// 	    $mail->setfrom('nikhilsyal7@gmail.com', 'CedHosting');            
+				// 	    $mail->addAddress($email); 
+				// 	    $mail->addAddress($email, $name); 
 					       
-					    $mail->isHTML(true);                                   
-					    $mail->Subject = 'Account Verification'; 
-					    $mail->Body    = 'Hi User,Here is your otp for account verification-'.$otp; 
-					    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
-					    $mail->send();
-					    header('location: verification.php?email=' . $email);
-					} 
-					catch (Exception $e)
-					 {
-					    echo "Mailer Error: " . $mail->ErrorInfo;
-					}
+				// 	    $mail->isHTML(true);                                   
+				// 	    $mail->Subject = 'Account Verification'; 
+				// 	    $mail->Body    = 'Hi User,Here is your otp for account verification-'.$otp; 
+				// 	    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+				// 	    $mail->send();
+				// 	    header('location: verification.php?email=' . $email);
+				// 	} 
+				// 	catch (Exception $e)
+				// 	 {
+				// 	    echo "Mailer Error: " . $mail->ErrorInfo;
+				// 	}
 									
 									
 								}
