@@ -12,6 +12,11 @@ if(isset($_GET['eid'])){
     $m=$_GET['eid'];
     $obj2->cat_edit($m,$obj->conn);
 }
+if(isset($_GET['proddel'])){
+    $m=$_GET['proddel'];
+   
+    $obj2->cat_del2($m,$obj->conn);
+}
 
 
 ?>

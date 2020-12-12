@@ -32,34 +32,7 @@ if (isset($_POST['submit'])) {
 	
 	$obj2->entry($name,$phone,$ques,$ans,$userpassword,$email, $userpassword2,$obj->conn);
 
-            	// $otp = rand(1000,9999);
-				// $_SESSION['otp']=$otp;
-				// $mail = new PHPMailer();
-				// try {                                       
-				// 	     $mail->isSMTP(true);                                             
-				// 	    $mail->Host       = 'smtp.gmail.com';                     
-				// 	    $mail->SMTPAuth   = true;                              
-				// 	    $mail->Username   = 'nikhilsyal7@gmail.com';                  
-				// 	    $mail->Password   = 'nikhil_0987';                         
-				// 	    $mail->SMTPSecure = 'tls';                               
-				// 	    $mail->Port       = 587;   
-					  
-				// 	    $mail->setfrom('nikhilsyal7@gmail.com', 'CedHosting');            
-				// 	    $mail->addAddress($email); 
-				// 	    $mail->addAddress($email, $name); 
-					       
-				// 	    $mail->isHTML(true);                                   
-				// 	    $mail->Subject = 'Account Verification'; 
-				// 	    $mail->Body    = 'Hi User,Here is your otp for account verification-'.$otp; 
-				// 	    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
-				// 	    $mail->send();
-				// 	    header('location: verification.php?email=' . $email);
-				// 	} 
-				// 	catch (Exception $e)
-				// 	 {
-				// 	    echo "Mailer Error: " . $mail->ErrorInfo;
-				// 	}
-									
+        			
 									
 								}
 		

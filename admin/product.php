@@ -4,6 +4,7 @@ require_once('../class/product.php');
 require_once('../class/dbcon.php');
 $obj= new DB();
 $obj2=new Product();
+
 ?>
 
 <?php 
@@ -22,7 +23,7 @@ if(isset($_POST['submit'])){
   $obj2->cat($drop,$name,$url,$obj->conn);
   $age = array("web_space"=>$web_space,
                "band_width"=>$band, 
-               "web_space"=>$web_space,
+               "free_domain"=>$free, 
                "mail"=>$mail, 
                "l/t_support"=>$lang);
               
@@ -138,13 +139,13 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
           </span>
         </label>
         <div id="cid_4" class="form-input-wide jf-required" data-layout="half">
-          <input type="text" id="input_4" name="name" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_4" required="" />
+          <input type="text" id="input_4"  onkeydown="return alphaonly(event);" pattern="^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$ " name="name" data-type="input-textbox"  class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_4" required="" />
         </div>
       </li>
       <li class="form-line" data-type="control_textbox" id="id_5">
         <label class="form-label form-label-top form-label-auto" id="label_5" for="input_5"> Page URL </label>
         <div id="cid_5" class="form-input-wide" data-layout="half">
-          <input type="text" id="input_5" name="url" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_5" />
+          <input type="text" id="input_5"  onkeydown="return alphaonly(event);" name="url" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_5" />
         </div>
       </li>
       <li class="form-line" data-type="control_divider" id="id_8">
@@ -174,7 +175,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_11" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="number" id="input_11" name="mprice" data-type="input-number" class=" form-number-input form-textbox validate[required]" style="width:310px" size="310" value="" placeholder="ex: 23" data-component="number" aria-labelledby="label_11 sublabel_input_11" required="" step="any" />
+            <input type="number" id="input_11"  onkeydown="return alphaonly(event);" name="mprice" data-type="input-number" class=" form-number-input form-textbox validate[required]" style="width:310px" size="310" value="" placeholder="ex: 23" data-component="number" aria-labelledby="label_11 sublabel_input_11" required="" step="any" />
             <label class="form-sub-label" for="input_11" id="sublabel_input_11" style="min-height:13px" aria-hidden="false"> This would be Monthly Plan </label>
           </span>
         </div>
@@ -188,7 +189,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_12" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="number" id="input_12" name="aprice" data-type="input-number" class=" form-number-input form-textbox validate[required]" style="width:310px" size="310" value="" placeholder="ex: 23" data-component="number" aria-labelledby="label_12 sublabel_input_12" required="" step="any" />
+            <input type="number" id="input_12"  onkeydown="return alphaonly(event);" name="aprice" data-type="input-number" class=" form-number-input form-textbox validate[required]" style="width:310px" size="310" value="" placeholder="ex: 23" data-component="number" aria-labelledby="label_12 sublabel_input_12" required="" step="any" />
             <label class="form-sub-label" for="input_12" id="sublabel_input_12" style="min-height:13px" aria-hidden="false"> This would be Annual Price </label>
           </span>
         </div>
@@ -201,7 +202,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
           </span>
         </label>
         <div id="cid_13" class="form-input-wide jf-required" data-layout="half">
-          <input type="text" id="input_13" name="sku" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_13" required="" />
+          <input type="text" id="input_13" name="sku"  onkeydown="return alphaonly(event);" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_13" required="" />
         </div>
       </li>
       <li class="form-line" data-type="control_divider" id="id_14">
@@ -228,7 +229,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_16" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="text" id="input_16" name="web_space" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_16 sublabel_input_16" required="" />
+            <input type="text" id="input_16" name="web_space" onkeydown="return alphaonly(event);" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_16 sublabel_input_16" required="" />
             <label class="form-sub-label" for="input_16" id="sublabel_input_16" style="min-height:13px" aria-hidden="false"> Enter 0.5 for 512 MB </label>
           </span>
         </div>
@@ -242,7 +243,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_17" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="text" id="input_17" name="band" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_17 sublabel_input_17" required="" />
+            <input type="text" id="input_17" onkeydown="return alphaonly(event);" name="band" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_17 sublabel_input_17" required="" />
             <label class="form-sub-label" for="input_17" id="sublabel_input_17" style="min-height:13px" aria-hidden="false"> Enter 0.5 for 512 MB </label>
           </span>
         </div>
@@ -256,7 +257,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_18" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="text" id="input_18" name="free" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_18 sublabel_input_18" required="" />
+            <input type="text" id="input_18" onkeydown="return alphaonly(event);" name="free" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_18 sublabel_input_18" required="" />
             <label class="form-sub-label" for="input_18" id="sublabel_input_18" style="min-height:13px" aria-hidden="false"> Enter 0 if no domain available in this service </label>
           </span>
         </div>
@@ -270,7 +271,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_19" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="text" id="input_19" name="lang" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_19 sublabel_input_19" required="" />
+            <input type="text" id="input_19" onkeydown="return alphaonly(event);" name="lang" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_19 sublabel_input_19" required="" />
             <label class="form-sub-label" for="input_19" id="sublabel_input_19" style="min-height:13px" aria-hidden="false"> Separate by (,) Ex: PHP, MySQL, MongoDB </label>
           </span>
         </div>
@@ -284,7 +285,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
         </label>
         <div id="cid_20" class="form-input-wide jf-required" data-layout="half">
           <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="text" id="input_20" name="mail" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_20 sublabel_input_20" required="" />
+            <input type="text" id="input_20" name="mail" onkeydown="return alphaonly(event);" data-type="input-textbox" class="form-textbox validate[required]" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_20 sublabel_input_20" required="" />
             <label class="form-sub-label" for="input_20" id="sublabel_input_20" style="min-height:13px" aria-hidden="false"> Enter Number of mailbox will be provided, enter 0 if none </label>
           </span>
         </div>
@@ -300,11 +301,31 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"createNew","qid":"1","text":"Create
       </li>
       <li style="display:none">
         Should be Empty:
-        <input type="text" name="website" value="" />
+        <input type="text" name="website"  value="" />
       </li>
     </ul>
   </div>
- 
+ <script>
+ var count=0;
+ 			function alphaonly(button) { 
+					var code = button.which;
+					if(count>0 && code==32 ){
+		         	count=0;
+					  return true; 
+			       
+		} 
+	       
+         if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code==09)) {
+					count++;
+			    return true; 
+		     	
+				 }
+				 else{
+					return false;  
+				 }
+      
+    } 
+ </script>
   <script>
   JotForm.showJotFormPowered = "new_footer";
   </script>
@@ -320,8 +341,8 @@ for (var i = 0; i < all_spc.length; i++)
 }
   </script>
  
-</form></body>
-</html>
+</form>
+
 <script src="https://cdn.jotfor.ms//js/vendor/smoothscroll.min.js?v=3.3.22245"></script>
 <script src="https://cdn.jotfor.ms//js/errorNavigation.js?v=3.3.22245"></script>
 
