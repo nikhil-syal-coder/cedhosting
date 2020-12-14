@@ -104,7 +104,7 @@ $(".swipebox").swipebox();
           {
           ?>
        
-<li <?php if ($file[0]==$val['link']) : ?>class="active"<?php endif;?>><a href="<?php echo $val['link'];?>"><?php echo $val['prod_name']?></a></li>
+<li <?php if ($file[0]==$val['id']) : ?>class="active"<?php endif;?>><a href="catepage.php?id=<?php echo $val['id'];?>"><?php echo $val['prod_name']?></a></li>
 <?php } ?>
 </ul>
 </li>

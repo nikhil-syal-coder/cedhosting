@@ -9,8 +9,8 @@ class Product{
     public $id,$name,$link,$avb,$conn;
     function cat($id,$name,$link,$conn){
      
-     $sql="INSERT INTO `tbl_product` (`prod_parent_id`, `prod_name`, `link`,`prod_available`, `prod_launch_date`)
-      VALUES ('".$id."', '".$name."', '".$link."',1, CURRENT_DATE())";
+     $sql="INSERT INTO `tbl_product` (`prod_parent_id`, `prod_name`, `html`,`prod_available`, `prod_launch_date`)
+      VALUES ('".$id."', '".$name."', '".$link."',1, now())";
      $result=$conn->query($sql);
      $last_id = $conn->insert_id;
      $_SESSION['id']=$last_id;
@@ -35,10 +35,10 @@ class Product{
      header("location:category.php");
     }
 
-function cat_edit($id,$parentid,$name,$link,$avb,$conn){
+function cat_edit($id,$parentid,$name,$avb,$conn){
     echo "<script>alert('Category updated');</script>";
     $sql="UPDATE `tbl_product`
-     SET `prod_name`='".$name."' ,`link`='".$link."', `prod_available`='".$avb."',`prod_parent_id`='".$parentid."'
+     SET `prod_name`='".$name."',`prod_available`='".$avb."',`prod_parent_id`='".$parentid."'
      WHERE `id`='".$id."'";
    
  $result=$conn->query($sql);
@@ -94,7 +94,7 @@ function prod_name($name,$conn){
 }
 }
 function cat2($id,$drop,$parent,$name,$url,$avb,$conn){
-$sql="UPDATE tbl_product SET `prod_name`='".$name."',`link`='".$url."',`prod_available`='".$avb."',`prod_parent_id`='".$drop."'
+$sql="UPDATE tbl_product SET `prod_name`='".$name."',`html`='".$url."',`prod_available`='".$avb."',`prod_parent_id`='".$drop."'
 WHERE `id`='".$id."'";
 $result=$conn->query($sql);
 echo "<script>alert('product updated');</script>";
@@ -113,5 +113,19 @@ function cat_del2($m,$conn){
      echo "<script>alert('Category Deleted');</script>";
      header("location:productview.php");
     }
+
+
+function cat_dyn($m,$conn){
+    $sql="SELECT * FROM `tbl_product` Where `id`='".$m."'";
+    $result=$conn->query($sql);
+    $arry=array();
+    if ($result->num_rows > 0) {
+        while ($row= $result->fetch_assoc()) {
+            array_push($arry,$row) ;
+        }
+        return $arry;
+}
+
+}    
 
 }

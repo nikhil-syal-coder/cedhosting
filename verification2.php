@@ -99,7 +99,7 @@ if ($err) {
 				
 				<div class="clearfix"> </div>
                 <div class="register-top-grid">
-                    <h3>Enter Your Otp</h3>
+                    <h3>Enter Your Otp send in your register Phone no.</h3>
                   <div>
 						<span>OTP<label>*</label></span>
                         <input type="text" name="otp" >

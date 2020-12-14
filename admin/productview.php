@@ -44,7 +44,7 @@ if(isset($_POST['submitt'])){
           $obj2=new Product();
           $back=$obj2->cat_list($obj->conn);
          $a1=' <div id="cid_3" class="form-input-wide jf-required" data-layout="half"> <i class="fas fa-envelope prefix grey-text"></i>
-         <select class="form-dropdown validate[required]" id="input_3" name="drop" style="width:310px" data-component="dropdown" required="" aria-labelledby="label_3"><option value=""> Please Select </option>';
+         <select class="form-dropdown validate[required]" id="input_3" name="drop" style="width:310px" data-component="dropdown"  aria-labelledby="label_3"><option value=""> Please Select </option>';
           foreach($back as $val){
             $a1.=' <option value="'.$val['id'].'"> '.$val['prod_name'].'</option>';
           }
@@ -54,7 +54,7 @@ if(isset($_POST['submitt'])){
 <?php
 $back=$obj2->prod_list($obj->conn);
 echo '<center><h3>View Product List</h3></center>';
-$a='<div class="table-responsive"><table id="myTable"><thead><tr><th>Product-Parent-id</th><th>Product-Name</th><th>Product-Link</th><th>Product-Launch-Date</th><th>Monthly-Price</th><th>Yearly-Price</th><th>Sku</th><th>Web-Space</th><th>Band-Width</th><th>Free-Domain</th><th>Mail-box</th><th>L/T-Support</th><th>Action</th></tr></thead><tbody><tr>';
+$a='<div class="table-responsive"><table id="myTable"><thead><tr><th>Product-Parent-id</th><th>Product-Name</th><th>Product-Launch-Date</th><th>Monthly-Price</th><th>Yearly-Price</th><th>Sku</th><th>Web-Space</th><th>Band-Width</th><th>Free-Domain</th><th>Mail-box</th><th>L/T-Support</th><th>Action</th></tr></thead><tbody><tr>';
 foreach($back as $val){
   $val3='';
     $name=$val['prod_parent_id'];
@@ -67,7 +67,7 @@ foreach($back as $val){
     $abc=json_decode($val['description'], true);
     $a.='<td>'.$val['prod_parent_id'].'</td>';
     $a.='<td>'.$val['prod_name'].'</td>';
-    $a.='<td>'.$val['link'].'</td>';
+   
     $a.='<td>'.$val['prod_launch_date'].'</td>';
     $a.='<td>'.$val['mon_price'].'</td>';
     $a.='<td>'.$val['annual_price'].'</td>';
@@ -161,8 +161,8 @@ foreach($back as $val){
     </div>
     <div class="md-form mb-4">
     <i class="fas fa-lock prefix grey-text"></i>
-    <input type ="text" value="'.$val['link'].'" name="url"  id="defaultForm-email" class="form-control validate id ml-4">
-    <label data-error="wrong" data-success="right" for="defaultForm-pass">Link</label>
+    <input type ="text" value="'.$val['html'].'" name="url"  id="defaultForm-email" class="form-control validate id ml-4">
+    <label data-error="wrong" data-success="right" for="defaultForm-pass">Html</label>
   </div>
   <div class="md-form mb-4">
   <i class="fas fa-lock prefix grey-text"></i>
