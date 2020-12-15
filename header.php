@@ -1,7 +1,15 @@
 <?php
 
 session_start();
-
+// if(!isset($_SESSION['userdata']['name'])){
+//     echo "<script>alert(' please login first');
+//     window.location.href='login.php';</script>";
+//   }
+//   if($_SESSION['userdata']['name']!='nikhil'){
+//       session_destroy();
+//     echo "<script>alert(' please login first');
+//     window.location.href='login.php';</script>";
+//   }
 $filename=basename($_SERVER['REQUEST_URI']);
 $file=explode("?",$filename);
 $hosting=array('cmshosting.php','linuxhosting.php','windowshosting.php','wordpresshosting.php');
@@ -9,6 +17,7 @@ $hosting=array('cmshosting.php','linuxhosting.php','windowshosting.php','wordpre
 
 
 ?>
+
 <!DOCTYPE HTML>
 <html>
 <head>

@@ -31,7 +31,16 @@ class User{
                 $count++;
                 }
             }  
-                 
+            if($name!='admin'){
+                $sql="SELECT * FROM `tbl_user` WHERE `mobile`='".$phone."'";
+                $result=$conn->query($sql);
+                if ($result->num_rows > 0) {
+                    echo "<script>alert('Phone already exists');
+                </script>";
+                $count++;
+                }
+            } 
+            
         if ($count==0) {
 
            $sql="INSERT INTO `tbl_user` ( `email`, `name`, `mobile`, `password`, `security_question`, `security_answer`,`is_admin`)
@@ -53,11 +62,13 @@ class User{
             
                 }
             } 
+
+         
         
    function admit($email,$password,$conn){
-                $count=0;
+             
                 
-                if ($count==0) {
+           
                     
                      $sql1="SELECT * from tbl_user WHERE `email`='".$email."'
                      AND password='".md5($password)."'";
@@ -73,8 +84,13 @@ class User{
                             {
                                  if($row['active']==0)
                                  {
-                                 
-                                    echo "<script>alert('Account not approve yet please wait for  admin approval');<script>";
+                                    $_SESSION['name'] =$row['name'];
+                                    $_SESSION['phone'] =$row['mobile'];
+                                    $_SESSION['email'] =$row['email'];
+                                    $_SESSION['ques'] =$row['security_question'];
+                                    $_SESSION['ans'] =$row['security_answer'];
+                                    echo "<script>alert('Verification Pending please complete the process');
+                                    window.location.href='account2.php';</script>";
                                 } 
                                 else{
                                     echo "<script>alert('logged in successfully');
@@ -90,16 +106,15 @@ class User{
                              
                                
                           }    
-     }
-              
-                    // else {
-                    //   $count++;
-                    //   echo "<center><h3 style='color:white; font-size:1.2em;'>Invalid Login credentials</h3></center>";
-                    // }
-                    
-            }
-           
+                    }
+
+                    else
+                    {
+                        echo "<script>alert('invalid details please go for correct one');</script>";
+                        
+                    }
         }
+
         function verify($name,$m,$conn){
            
            

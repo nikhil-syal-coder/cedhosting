@@ -1,7 +1,14 @@
+
 <?php 
-
 session_start();
-
+if(!isset($_SESSION['userdata']['name'])){
+  echo "<script>alert(' please login first');
+  window.location.href='../login.php';</script>";
+}
+if($_SESSION['userdata']['name']!='nikhil'){
+  echo "<script>alert(' please login first');
+  window.location.href='../login.php';</script>";
+}
 ?>
 <!DOCTYPE html>
 <html>

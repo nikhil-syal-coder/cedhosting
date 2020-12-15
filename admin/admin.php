@@ -1,14 +1,8 @@
 
 <?php 
-require_once("header.php") ;
-if(!isset($_SESSION['userdata']['name'])){
-  echo "<script>alert(' please login first');
-  window.location.href='../login.php';</script>";
-}
-if($_SESSION['userdata']['name']!='nikhil'){
-  echo "<script>alert(' please login first');
-  window.location.href='../login.php';</script>";
-}
+require_once("header.php");
+
+
 ?>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">

@@ -28,10 +28,7 @@ if(isset($_POST['submit'])){
                "l/t_support"=>$lang);
               
    $desp= json_encode($age);
-   echo '<pre>';
-  print_r($_POST);
-  echo '</pre>';
-  echo $desp;
+  
    $obj2->product_entry($name,$desp,$mprice,$aprice,$sku,$obj->conn);
 }
 
@@ -125,14 +122,14 @@ if(isset($_POST['submit'])){
 <div class="col-lg-6">
 <div class="form-group">
 <label class="form-control-label" for="input-username">Enter Monthly Price *</label>
-<input type="text" id="proprice" name="mprice" class="form-control mpriceid" placeholder="ex: 23" required maxlength="15">
+<input type="text" id="proprice" name="mprice" class="form-control mpriceid" placeholder="ex: 23" required>
 <p id="lablemprice"></p>
 </div>
 </div>
 <div class="col-lg-6">
 <div class="form-group">
 <label class="form-control-label" for="input-email">Enter Annual Price *</label>
-<input type="text" id="aprice" name="aprice" class="form-control apriceid" placeholder="ex: 23" required maxlength="15">
+<input type="text" id="aprice" name="aprice" class="form-control apriceid" placeholder="ex: 23" required>
 <p id="lableaprice"></p>
 </div>
 </div>
@@ -155,7 +152,7 @@ if(isset($_POST['submit'])){
 <div class="col-lg-6">
 <div class="form-group">
 <label class="form-control-label" for="input-username">Web Space(in GB) *</label>
-<input type="text" id="proweb" name="web_space" class="form-control webid" maxlength="5" placeholder="Web Space(in GB)" required >
+<input type="text" id="proweb" name="web_space" class="form-control webid" placeholder="Web Space(in GB)" required>
 <h6 class="heading-small text-muted mb-4">Enter 0.5 for 512 MB</h6>
 <p id="lableweb"></p>
 </div>
@@ -163,7 +160,7 @@ if(isset($_POST['submit'])){
 <div class="col-lg-6">
 <div class="form-group">
 <label class="form-control-label" for="input-email">Bandwidth (in GB) *</label>
-<input type="text" id="proband" name="band" class="form-control bandid" maxlength="5" placeholder="Bandwidth (in GB)" required>
+<input type="text" id="proband" name="band" class="form-control bandid" placeholder="Bandwidth (in GB)" required>
 <h6 class="heading-small text-muted mb-4">Enter 0.5 for 512 MB</h6>
 <p id="lableband"></p>
 </div>
@@ -183,7 +180,7 @@ if(isset($_POST['submit'])){
 <div class="form-group">
 <label class="form-control-label" for="input-first-name">Language / Technology *
 Support</label>
-<input type="text" id="prolang" name="lang" class="form-control prolang" placeholder="Language / Technology" required>
+<input type="text" id="prolang" name="lang" class="form-control prolang" placeholder="Free Domain" required>
 <h6 class="heading-small text-muted mb-4">Separate by (,) Ex: PHP, MySQL, MongoDB</h6>
 <p id="prodlang"></p>
 </div>

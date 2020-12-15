@@ -7,6 +7,7 @@ if(!isset($_SESSION)){
 require_once('dbcon.php');
 class Product{
     public $id,$name,$link,$avb,$conn;
+
     function cat($id,$name,$link,$conn){
      
      $sql="INSERT INTO `tbl_product` (`prod_parent_id`, `prod_name`, `html`,`prod_available`, `prod_launch_date`)
@@ -16,6 +17,7 @@ class Product{
      $_SESSION['id']=$last_id;
      echo "<script>alert('Category entered');</script>";
     }
+    
     function cat_print($conn){
         $arry=array();
         $sql="SELECT * from tbl_product WHERE `prod_parent_id`='1'";
@@ -127,5 +129,22 @@ function cat_dyn($m,$conn){
 }
 
 }    
+function cont_dyn($m,$conn){
+
+$arry=array();
+ $sql="SELECT * FROM tbl_product
+INNER JOIN tbl_product_description ON tbl_product.id = tbl_product_description.prod_id WHERE `prod_parent_id`='$m'";
+$result=$conn->query($sql);
+ if ($result->num_rows > 0) {
+     while ($row= $result->fetch_assoc()) {
+         array_push($arry,$row) ;
+     }
+     return $arry;
+ }
+}
+
+
+
+
 
 }

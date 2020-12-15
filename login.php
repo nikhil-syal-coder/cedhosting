@@ -5,7 +5,9 @@
  require_once('class/dbcon.php');
  $obj= new DB();
  $obj2=new User();
-
+if(isset($_SESSION['userdata'])){
+	header("location:Logout.php");
+}
  if (isset($_POST['submit'])) {
     $email=isset($_POST['email'])?$_POST['email']:'';
     $email=strtolower($email);

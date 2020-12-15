@@ -246,15 +246,23 @@ $(".bandid").focusout(function() {
 })
 
 
+
 $(".domainid").focusout(function() {
     $domain = $(".domainid").val();
-     $first = $band.substr(0, 1);
-    // $second = $band.substr(1, 1);
+     $first = $domain.substr(0, 1);
+     if($first.match(/^[a-zA-Z]+$/))
+{
+$pattern=/^[a-zA-Z]+$/;
+}
+else if($first.match(/^[0-9]+$/))
+{
+$pattern=/^[0-9]+$/;
+}
     if ($domain == "" || $domain == null) {
         $("#labledomain").html("*Enter  No of domain.");
         $("#labledomain").show();
         $(this).css('border', 'solid 3px red');
-    } else if (!$domain.match(/^[0-9]\d*?$/)) {
+    } else if (!$domain.match($pattern)) {
         $("#labledomain").html("*Domain can be only Numeric and dot(.) not allowed");
         $("#labledomain").show();
         $(this).css('border', 'solid 3px red');
@@ -272,11 +280,18 @@ $(".prolang").focusout(function() {
         $("#prodlang").show();
         $(this).css('border', 'solid 3px red');
     }  
-    else if(!$prolang.match(/^[a-zA-Z,]+[a-zA-Z]+$/))
+    else if(!$prolang.match(/^([a-zA-Z0-9]+(,[a-zA-z0-9]+))+$/))
     {
         $("#prodlang").html("*Select Valid language");
         $("#prodlang").show();
        $(this).css('border', 'solid 3px red'); 
+
+       if($prolang.match(/^[a-zA-Z0-9]+$/)){
+        $("#prodlang").hide();
+        $(this).css('border', 'solid 3px green');
+        count9=1;
+         act();
+       }
     }
     else if($prolang<.5)
     {
@@ -297,12 +312,22 @@ $(".prolang").focusout(function() {
 
 $(".promail").focusout(function() {
     $promail = $(".promail").val();
+    $first = $promail.substr(0, 1);
+if($first.match(/^[a-zA-Z]+$/))
+{
+$pattern=/^[a-zA-Z]+$/;
+}
+else if($first.match(/^[0-9]+$/))
+{
+$pattern=/^[0-9]+$/;
+}
+
     if ($promail == "") {
         $("#prodmail").html("*Select Mail");
         $("#prodmail").show();
        $(this).css('border', 'solid 3px red');
     }  
-    else if(!$promail.match(/^[0-9]+$/))
+    else if(!$promail.match($pattern))
     {
         $("#prodmail").html("*Select Valid Mail box");
         $("#prodmail").show();
@@ -329,67 +354,7 @@ function act(){
 
 
 
-// $("#prosku").focusout(function() {
-//     $prosku = $("#prosku").val();
-//     if ($prosku == "") {
-//         $("#prodsku").html("*Select sku");
-//         $("#prodsku").show();
-//        $("#submit10").attr("disabled",true);
-
-//         $(this).css('border', 'solid 3px red');
-//     }  
-//     else if(!$prosku.match(/^[a-zA-z0-9]+[a-zA-Z0-9#-]+$/))
-//     {
-//         $("#prodsku").html("*Select Valid sku");
-//         $("#prodsku").show();
-//        $("#submit10").attr("disabled",true);
-
-//         $(this).css('border', 'solid 3px red'); 
-//     }
-  
-    
-    
-//     else {
-//         $("#submit10").attr("disabled",false);
-//         $("#prodsku").hide();
-//         $(this).css('border', 'solid 3px green');
-//     }
-
-
-
-// });
-
-
-// function validateUpdateForm() {
-//     $("#prodCategory").hide();
-//     $("#prodname").hide();
-
-//     var categoryid = document.forms["productform"]["categoryid"].value;
-//     var pname = document.forms["productform"]["pname"].value;
-//     var url = document.forms["productform"]["url"].value;
-
-
-//     if (categoryid == "") {
-//         $("#prodCategory").html("*Select Category");
-//         $("#prodCategory").show();
-//         return false;
-//     }
-
-//     if (pname == "" || pname == null) {
-//         $("#prodname").html("*Enter Product Name");
-//         $("#prodname").show();
-//         return false;
-//     }
-  
-
-//     if (url == "" || url == null) {
-//         $("#urlid").html("*Enter Product url");
-//         $("#urlid").show();
-//         return false;
-//     }
-
-
-// }
+$('.mpriceid').attr('maxlength', 15);
   </script>
 </body>
 

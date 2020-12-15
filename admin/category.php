@@ -62,7 +62,8 @@ if (isset($_POST['submitt']))
     $a.='<td>'.$val['prod_parent_id'].'</td>';
     $a.='<td>'.$val['prod_name'].'</td>';
     // $a.='<td>'.$val['html'].'</td>';
-    $a.='<td>'.$val['prod_available'].'</td>';
+    $a.=($val['prod_available']==1)?('<td>Product Available</td>'):('<td>Product Not Available</td>');
+    // $a.='<td>'.$val['prod_available'].'</td>';
     $a.='<td>'.$val['prod_launch_date'].'</td>';
     $a.='<td><a '.$fg.' href="cat_del.php?id='.$val['id'].'" class="btn btn-default btn-rounded mb-4 sa">Delete</a><a href="cat_del.php?eid='.$val['id'].'" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm'.$val['id'].'">Edit</a></td></tr>';
     $b='
@@ -101,8 +102,13 @@ if (isset($_POST['submitt']))
 
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <input type ="text" value="'.$val['prod_available'].'" name="avb" id="defaultForm-email" class="form-control validate id ml-4">
-          <label data-error="wrong" data-success="right" for="defaultForm-pass"> Product-Avaiblable</label>
+          <select class="form-control validate id ml-4" name="avb" id="defaultForm-email" value="'.$val['prod_available'].'" >
+        
+          <option value="1">Product-Available</option>
+          <option value="0">Product-Non-Available</option>
+   
+        </select>
+        <label data-error="wrong" data-success="right" for="defaultForm-pass"> Product-Avaiblable</label>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
