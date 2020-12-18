@@ -15,7 +15,9 @@ $filename=basename($_SERVER['REQUEST_URI']);
 $file=explode("?",$filename);
 $hosting=array('cmshosting.php','linuxhosting.php','windowshosting.php','wordpresshosting.php');
 
-
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart']=array();
+}
 
 ?>
 

@@ -54,7 +54,15 @@ if(isset($_GET['id'])){
 													<li><strong>location</strong> : <img src="images/india.png"></li>
 													</ul>
 												</div>
-												<a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm<?php $value['prod_name']?>">Buy-Now</a></td>
+												<?php
+												$by=0;
+												foreach($_SESSION['cart'] as $key3=>$val3){
+												if($val3['id']==$value['prod_id'])	{
+													$by=1;
+												?>
+												<a href="cart.php">Go to Cart</a>
+												<?php }} if($by==0){?>
+												<a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm<?php $value['prod_name']?>">Buy-Now</a></td><?php } ?>
 												<!-- <a href="cartpage.php?id=<?php echo $value['prod_parent_id'] ?>">buy now</a> -->
 												<div class="modal fade" id="modalLoginForm<?php $val['prod_name']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 													aria-hidden="true">

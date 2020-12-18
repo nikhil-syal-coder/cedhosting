@@ -1,8 +1,6 @@
 <?php 
 session_start();
-if(!isset($_SESSION['cart'])){
-    $_SESSION['cart']=array();
-}
+
 if(isset($_GET['id'])){
     $m=$_GET['id'];
     
@@ -21,7 +19,7 @@ if(isset($_GET['id'])){
                'domain'=>$abc['free_domain'],
                'band_width'=>$abc['band_width'],
                'sku'=>$value['sku'],
-               'id'=>$value['id'],
+               'id'=>$value['prod_id'],
                'parent_id'=>$value['prod_parent_id']
 
 );
@@ -44,7 +42,7 @@ if($_GET['action']=="ann"){
                'domain'=>$abc['free_domain'],
                'band_width'=>$abc['band_width'],
                'sku'=>$value['sku'],
-               'id'=>$value['id'],
+               'id'=>$value['prod_id'],
                'parent_id'=>$value['prod_parent_id']
 
 );
