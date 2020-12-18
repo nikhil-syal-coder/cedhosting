@@ -201,7 +201,7 @@ if none</h6>
 </div>
 </div>
 <div class="text-center">
-<input type="submit" name="submit" onsubmit="act()"  id="submit" value="Add Product" class="btn btn-primary">
+<input type="submit" name="submit" onsubmit="act()"  id="submit" value="Add Product" class="btn btn-primary bntn">
 </div>
 </div>
 </form>

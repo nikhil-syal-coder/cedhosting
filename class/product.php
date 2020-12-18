@@ -50,7 +50,7 @@ function cat_edit($id,$parentid,$name,$avb,$conn){
 
 function cat_list($conn){
     $arry=array();
-    $sql="SELECT * from tbl_product Where `prod_parent_id`!='0' AND `prod_parent_id`='1'";
+    $sql="SELECT * from tbl_product Where `prod_available`!='0' AND `prod_parent_id`='1'";
     $result=$conn->query($sql);
     // return $result;
     if ($result->num_rows > 0) {
@@ -142,6 +142,18 @@ $result=$conn->query($sql);
      return $arry;
  }
 }
+function name($name,$conn){
+    $sql="SELECT * from tbl_product Where `prod_name`='".$name."' AND `prod_parent_id`='1'";
+    
+    $result=$conn->query($sql);
+   
+    if ($result->num_rows > 0) {
+        return 1;
+        }
+        else{
+            return 0;
+        }
+    }
 
 
 

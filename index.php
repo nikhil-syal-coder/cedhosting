@@ -1,11 +1,11 @@
 <?php 
 require "header.php" ;
-if(!isset($_SESSION['userdata']['name'])){
-	session_destroy();
-    echo "<script>alert(' please login first');
-    window.location.href='login.php';</script>";
-  }
-  if($_SESSION['userdata']['name']=='nikhil'){
+// if(!isset($_SESSION['userdata']['name'])){
+// 	session_destroy();
+//     echo "<script>alert(' please login first');
+//     window.location.href='login.php';</script>";
+//   }
+  if(isset($_SESSION['userdata']['name'])=='nikhil'){
 	session_destroy();
     echo "<script>alert(' please login first');
     window.location.href='login.php';</script>";

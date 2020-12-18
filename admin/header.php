@@ -41,7 +41,7 @@ if($_SESSION['userdata']['name']!='nikhil'){
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-        <span style="color: #585CA7;">Ced</span> <span style="color: #e7663f;">Hosting</span>
+        <h1><a href="index.html"><span style="background-color: #585CA7;">Ced</span><span style="background-color: #e7663f;">Hosting</span></a></h1>
           <!-- <img src="assets/img/brand/blue.png" class="navbar-brand-img" alt="..."> -->
         </a>
       </div>

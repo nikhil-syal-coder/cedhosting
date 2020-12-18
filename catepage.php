@@ -1,6 +1,10 @@
 <?php 
 require_once('header.php');
+if(!isset($_GET['id'])){
+	echo "<script>alert('id is not select plz select it');
+	window.location.href='index.php';</script>";
 
+}
 ?>
 
 <?php
@@ -16,8 +20,7 @@ if(isset($_GET['id'])){
   }
   $back2=$obj2->cont_dyn($m,$obj->conn);
 
-foreach($back2 as $value){
-    $abc=json_decode($value['description'], true);
+
 ?>
 	<div class="content">
 					
@@ -28,10 +31,14 @@ foreach($back2 as $value){
 									<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">IN Hosting</a></li>
 									<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">US Hosting</a></li>
 									</ul>
+							
 								<div id="myTabContent" class="tab-content">
 									<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+									<?php	foreach($back2 as $value){
+                                            $abc=json_decode($value['description'], true);  ?>
 										<div class="linux-prices">
 											<div class="col-md-3 linux-price">
+											
 												<div class="linux-top">
 												<h4><?php echo $value['prod_name']?></h4>
 												</div>
@@ -47,17 +54,42 @@ foreach($back2 as $value){
 													<li><strong>location</strong> : <img src="images/india.png"></li>
 													</ul>
 												</div>
-												<a href="#">buy now</a>
-											</div>
-                                        
-											<div class="clearfix"></div>
+												<a class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm<?php $value['prod_name']?>">Buy-Now</a></td>
+												<!-- <a href="cartpage.php?id=<?php echo $value['prod_parent_id'] ?>">buy now</a> -->
+												<div class="modal fade" id="modalLoginForm<?php $val['prod_name']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+													aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+														<div class="modal-header text-center">
+															<h4 class="modal-title w-100 font-weight-bold">Price-Select</h4>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<form method="POST">
+														<div class="modal-footer d-flex justify-content-center">
+														
+													   <a href="cartpage.php?id=<?php echo $value['prod_parent_id'] ?>&&action=mon&&action2=<?php echo $value['prod_id'] ?>"  class="btn btn-default" >Monthly</a>
+													   <a href="cartpage.php?id=<?php echo $value['prod_parent_id'] ?>&&action=ann&&action2=<?php echo $value['prod_id'] ?>"  class="btn btn-default" >Annually</a>
+													
+														</div>
+														</form>
+														</div>
+														</div>
+														</div>
+                                          
+										
+									<?php }} ?>
+									<div class="clearfix"></div>
 										</div>
+
+										
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- clients -->
+
 				<div class="clients">
 					<div class="container">
 						<h3>Some of our satisfied clients include...</h3>
@@ -71,11 +103,11 @@ foreach($back2 as $value){
 						</ul>
 					</div>
 				</div>
-       <!-- clients -->
+
 					<div class="whatdo">
 						<div class="container">
 							<h3><?php echo $value['prod_name']?>-Features</h3>
-                            <?php } }?>
+                        
 							<div class="what-grids">
 								<div class="col-md-4 what-grid">
 									<div class="what-left">

@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 // if(!isset($_SESSION['userdata']['name'])){
 //     echo "<script>alert(' please login first');
 //     window.location.href='login.php';</script>";
@@ -35,7 +36,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" type="text/css">
 <!---fonts-->
 <!--script-->
 <script src="js/modernizr.custom.97074.js"></script>
@@ -83,7 +84,7 @@ $(".swipebox").swipebox();
 <i class="icon-bar"></i>
 </button>
 <div class="navbar-brand">
-<h1><a href="index.html"><span style="color: #585CA7;">Ced</span> <span style="color: #e7663f;">Hosting</span></a></h1>
+<h1><a href="index.php"><span style="background-color: #585CA7;">Ced</span><span style="background-color: #e7663f;">Hosting</span></a></h1>
 </div>
 </div>
 
@@ -125,7 +126,10 @@ $(".swipebox").swipebox();
 <li class="<?php if ($file[0]=='blog.php') : ?>active<?php endif; ?>"><a href="blog.php">Blog</a></li>
 <li class="<?php if ($file[0]=='contact.php') : ?>active<?php endif; ?>"><a href="contact.php">Contact</a></li>
 
-<li class="<?php if ($file[0]=='cart.php') : ?>active<?php endif; ?>"><a href="cart.php"><i class="fas fa-shopping-cart"></i></a></li>
+<li class="<?php if ($file[0]=='cart.php') : ?>active<?php endif; ?>"><a href="cart.php"><i class="fas fa-shopping-cart"></i><span class="badge badge-success"><?php if(isset($_SESSION['cart'])){
+
+    echo count($_SESSION['cart']);
+} ?></span></a></li>
 <?php
 if(!isset($_SESSION['userdata']))
 {?>

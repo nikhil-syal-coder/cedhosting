@@ -351,6 +351,34 @@ function act(){
     $('.bntn').attr('disabled', false);
 }
 }
+$("#add").attr("disabled",true);
+$('#scn').bind("keypress keyup keydown", function (e){
+
+var catname = $('#scn').val();
+var regtwodots = /^(?!.*?\.\.).*?$/;
+var lcatname = catname.length;
+if ((catname.indexOf(".") == 0) || !(regtwodots.test(catname))) {
+alert("invalid category name!!");
+
+$("#subname").html("*Enter Valid Product Name");
+$("#subname").show();
+$("#add").attr("disabled",true);
+$(this).css('border', 'solid 3px red');
+count2=0;
+$("#scn").val("");
+
+
+}
+else if(Number.isInteger(parseInt($('#scn').val()))) {
+alert('Please Enter Security Answer in Correct Format');
+$('#scn').val("");
+
+}
+else
+$("#add").attr("disabled",false);
+});
+
+// });
 
 
 

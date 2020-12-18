@@ -10,7 +10,13 @@ if (isset($_POST['submit']))
     $name=isset($_POST['name'])?$_POST['name']:'';
     $link=isset($_POST['link'])?$_POST['link']:'';
     $id=1;
+   $az= $obj2->name($name,$obj->conn);
+   if($az==0){
     $obj2->cat($id,$name,$link,$obj->conn);
+   }
+   else{
+    echo "<script>alert('category name already exists');</script>";
+   }
 
 }
 if (isset($_POST['submitt']))
@@ -37,14 +43,15 @@ if (isset($_POST['submitt']))
     Product-Parent-Name : Hosting
 </div>
 <div class="form-control m-2">
-    Product-Name:<input type ="text" name="name" class="ll id ml-4">
+    Product-Name:<input type ="text" name="name" id="scn" class="ll id ml-4">
 </div>
+<p id="#subname"></p>
 <div class="form-control m-2">
     Product-link:<input type ="text" name="link" class="ll id ml-5 ">
 </div>
 
 <div class="form-control m-2">
- <input type ="Submit" name="submit" class="submit"></center>
+ <input type ="Submit" name="submit" id="add" class="submit"></center>
 </div>
 </form>
 
@@ -136,6 +143,101 @@ if (isset($_POST['submitt']))
 </style>
 
 </div>
+<!-- <script>
+///^(([a-zA-Z0-9 ]+[a-zA-Z0-9*(+*,)+]+))+$/
+var count1=0;
+var count2=0;
+$("#add").attr("disabled",true);
+
+$(document).ready(function() {
+
+  $("#selectc").focusout(function() {
+    $categoryid = $("#selectc").val();
+    if ($categoryid == "") {
+        $("#prodCategory").html("*Select Category");
+        $("#prodCategory").show();
+        $("#add").attr("disabled",true);
+        $(this).css('border', 'solid 3px red');
+        count1=0;
+    }
+     else {
+      
+        count1=1;
+        //$("#add").attr("disabled",false);
+        $("#prodCategory").hide();
+        $(this).css('border', 'solid 3px green');
+    }
+    a();
+  });
+
+$("#scn").focusout(function() {
+$proname = $(this).val();
+if ($proname == "") {
+    $("#subname").html("*Enter Category Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count2=0;
+}
+else if(!$proname.match(/^[a-zA-Z0-9]+[-/.]*$/))
+{
+    $("#subname").html("*Enter Valid Category Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count2=0;
+}
+//([a-zA-Z_]*[0-9])+([-/.])*( [a-zA-Z_]+)*(-[0-9]+(?!-)+)*$
+
+
+else {
+  
+  count2=1;
+    //$("#add").attr("disabled",false);
+    $("#prodname").hide();
+    $(this).css('border', 'solid 3px green');
+}
+a();
+  });
+
+$('#scn').bind("keypress keyup keydown", function (e){
+
+var scn = $('#scn').val();
+var regtwodots = /^(?!.*?\.\.).*?$/;
+var lscn = scn.length;
+if ((scn.indexOf(".") == 0) || !(regtwodots.test(scn))) {
+  alert("invalid category name!!");
+  
+  $("#subname").html("*Enter Valid Category Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count2=0;
+    $("#scn").val("");
+
+  return;
+}  else if(Number.isInteger(parseInt($('#scn').val()))) {
+        alert('Please Enter Valid Category Name!!');
+        $('#scn').val("");
+        return false;
+        }
+        else
+        return true;
+});
+
+  function a() {
+    if((count1+count2==2)) {
+
+      $("#add").attr("disabled",false);
+
+    }
+
+  }
+});  
+
+
+
+</script> -->
 <?php 
 require_once('footer.php');
 ?>
