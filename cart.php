@@ -11,11 +11,13 @@ if(count($_SESSION['cart'])==0){
               <table class="table align-items-center table-flush" id="myTable">
                 <thead class="thead-light">
                   <tr>
-                   
+                  <th scope="col" class="sort" data-sort="name">Product-id</th>
                     <th scope="col" class="sort" data-sort="name">Category-Name</th>
+              
                     <th scope="col" class="sort" data-sort="name">Product-Name</th>
                     <th scope="col" class="sort" data-sort="budget">Product-Price</th>
                     <th scope="col" class="sort" data-sort="status">Package</th>
+                    <th scope="col" class="sort" data-sort="status">Sku-Code</th>
                     <th scope="col" class="sort" data-sort="completion">Action</th>
                   
                   </tr>
@@ -30,6 +32,10 @@ if(count($_SESSION['cart'])==0){
                       $val3=$val2['prod_name'];
                       }
                  ?>
+                 <td class="budget">
+
+                      <?php echo $val['id'] ?>
+                      </td>
                     <td class="budget">
 
                        <?php echo $val3 ?>
@@ -40,11 +46,15 @@ if(count($_SESSION['cart'])==0){
                     </td> 
                     <td class="budget">
 
-                        <?php echo $val['price'] ?>
+                        <?php echo 'INR-'.$val['price'] ?>
                     </td>
                     <td class="budget">
 
                         <?php echo $val['Package'] ?>
+                    </td> 
+                    <td class="budget">
+
+                    <?php echo $val['sku'] ?>
                     </td> 
                    
                     <td class="budget">

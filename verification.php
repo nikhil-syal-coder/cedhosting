@@ -20,7 +20,7 @@ try {
         $mail->Host       = 'smtp.gmail.com';                     
         $mail->SMTPAuth   = true;                              
         $mail->Username   = 'nikhilsyal7@gmail.com';                  
-        $mail->Password   = 'nikhil_0987';                         
+        $mail->Password   = 'password';                         
         $mail->SMTPSecure = 'tls';                               
         $mail->Port       = 587;   
       

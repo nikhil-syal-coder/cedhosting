@@ -45,7 +45,7 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => json_encode($fields),
   CURLOPT_HTTPHEADER => array(
-    "authorization:12ipLshQWJV8gIqzklHye65jSODYbZwEafnxXNGvUKFC93MAcu81sAxhFSHk3pmZrbTeJn2Y6aMRcK0X",
+    "authorization:key",
     "accept: */*",
     "cache-control: no-cache",
     "content-type: application/json"
